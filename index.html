@@ -1,10 +1,91 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
+    <title>Rock Paper Scissors</title>
     <meta charset="UTF-8" />
   </head>
   <body>
-    <script></script>
+    <script>
+      let winCount = 0;
+      let loseCount = 0;
+
+      function computerPlay() {
+        let options = ["rock", "paper", "scissors"];
+        return options[Math.floor(Math.random() * options.length)];
+      }
+
+      function playRound(playerSelection, computerSelection) {
+        if (playerSelection === computerSelection) {
+          console.log("It's a Tie !");
+          displayScore();
+        } else if (
+          playerSelection === "paper" &&
+          computerSelection === "scissors"
+        ) {
+          console.log("You Lose ! Paper beats Scissors");
+          loseCount++;
+          displayScore();
+        } else if (
+          playerSelection === "paper" &&
+          computerSelection === "rock"
+        ) {
+          console.log("You Win ! Rock beats Paper");
+          winCount++;
+          displayScore();
+        } else if (
+          playerSelection === "rock" &&
+          computerSelection === "paper"
+        ) {
+          console.log("You Lose ! Paper beats Rock");
+          loseCount++;
+          displayScore();
+        } else if (
+          playerSelection === "rock" &&
+          computerSelection === "scissors"
+        ) {
+          console.log("You Win ! Rock beats Scissors");
+          winCount++;
+          displayScore();
+        } else if (
+          playerSelection === "scissors" &&
+          computerSelection === "paper"
+        ) {
+          console.log("You Win. Scissors beats Paper");
+          winCount++;
+          displayScore();
+        } else {
+          console.log("You Lose. Rock beats Scissors");
+          loseCount++;
+          displayScore();
+        }
+      }
+
+      function displayScore() {
+        console.log(`Current score: YOU ${winCount} : ${loseCount} COMPUTER`);
+      }
+
+      function getWinner() {
+        if (winCount === loseCount) {
+          console.log("Tie ! There is no winner");
+        } else if (winCount > loseCount) {
+          console.log("You are the winner ! Congratulations");
+        } else {
+          console.log("Computer wins. Try again");
+        }
+      }
+
+      function game() {
+        for (let i = 0; i < 5; i++) {
+          let playerSelection = prompt(
+            "Please enter your choice: "
+          ).toLocaleLowerCase();
+          let computerSelection = computerPlay();
+          playRound(playerSelection, computerSelection);
+        }
+        getWinner();
+      }
+
+      game();
+    </script>
   </body>
 </html>
